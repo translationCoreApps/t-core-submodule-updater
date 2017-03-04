@@ -1,0 +1,16 @@
+{
+  "name": "tc-submodule-manager",
+  "version": "1.0.0",
+  "description": "Automatically updates submodules in the translationCore repository based on webhooks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Ian Arlo Hoegen <ianhoegen@gmail.com> (https://github.com/ihoegen)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1"
+  }
+}
