@@ -7,16 +7,19 @@ const fs = require('fs-extra');
 const exec = require('child_process').exec;
 const mainRepo = "https://github.com/unfoldingWord-dev/translationCore.git";
 
-app.set('port', (process.env.PORT || 8000))
+app.set('port', (process.env.PORT || 8000));
+var inProgress = false;
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // index
 app.post('/', function (req, res) {
+  if (inProgress) return;
+  inProgress = true;
   if (req.body.pull_request.state != "closed") {
     console.log(req.body);
     res.send('Not a PR closing');
@@ -51,6 +54,7 @@ app.post('/', function (req, res) {
               console.log(data);
               console.log(err || "Succesfully updated");
               fs.removeSync('./translationCore');
+              inProgress = false;
               return;
             })
           });
