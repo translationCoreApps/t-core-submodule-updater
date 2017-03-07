@@ -19,35 +19,37 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
   res.send('Starting process')
   console.log('Cloning...');
-  exec('git config --global user.email "bot@unfoldingWord-dev.org"');
-  exec('git config --global user.name "translationCore Updater"');
   exec('git clone --recursive ' + mainRepo + ' translationCore',  (err, data) => {
-    console.log(err || data);
-    console.log('Updating...');
-    exec('npm run pull-apps', {cwd: './translationCore'}, (err, data) => {
-      if (err) {
-        console.log(err);
-        fs.removeSync('./translationCore');
-        return;
-      }
-      console.log(data);
-      console.log('Committing...');
-      exec('git commit -a -m"Update repos via translationCore Submodule Updater"', {cwd: './translationCore'}, (err, data) => {
-        if (err) {
-          console.log(err);
-          fs.removeSync('./translationCore');
-          return;
-        }
-        console.log(data);
-        var token = process.env.token;
-        var remote = 'https://' + token + '@github.com/unfoldingWord-dev/translationCore.git develop';
-        console.log('Pushing...');
-        exec('git push ' + remote, {cwd: './translationCore'}, (err, data) => {
+    exec('git config user.email "bot@unfoldingWord-dev.org"', {cwd: './translationCore'}, () => {
+      exec('git config user.name "translationCore Updater"', {cwd: './translationCore'}, ()=> {
+        console.log(err || data);
+        console.log('Updating...');
+        exec('npm run pull-apps', {cwd: './translationCore'}, (err, data) => {
+          if (err) {
+            console.log(err);
+            fs.removeSync('./translationCore');
+            return;
+          }
           console.log(data);
-          console.log(err || "Succesfully updated");
-          fs.removeSync('./translationCore');
-          return;
-        })
+          console.log('Committing...');
+          exec('git commit -a -m"Update repos via translationCore Submodule Updater"', {cwd: './translationCore'}, (err, data) => {
+            if (err) {
+              console.log(err);
+              fs.removeSync('./translationCore');
+              return;
+            }
+            console.log(data);
+            var token = process.env.token;
+            var remote = 'https://' + token + '@github.com/unfoldingWord-dev/translationCore.git develop';
+            console.log('Pushing...');
+            exec('git push ' + remote, {cwd: './translationCore'}, (err, data) => {
+              console.log(data);
+              console.log(err || "Succesfully updated");
+              fs.removeSync('./translationCore');
+              return;
+            })
+          });
+        });
       });
     });
   });
