@@ -19,6 +19,8 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
   res.send('Starting process')
   console.log('Cloning...');
+  exec('git config --global user.email "bot@unfoldingWord-dev.org"');
+  exec('git config --global user.name "translationCore Updater"');
   exec('git clone --recursive ' + mainRepo + ' translationCore',  (err, data) => {
     console.log(err || data);
     console.log('Updating...');
