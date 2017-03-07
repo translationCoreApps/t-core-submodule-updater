@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
   res.send('Starting process')
   console.log('Cloning...');
-  exec('git clone --recursive -j8 ' + mainRepo + ' translationCore',  (err, data) => {
+  exec('git clone --recursive ' + mainRepo + ' translationCore',  (err, data) => {
     console.log(err || data);
     console.log('Updating...');
     exec('npm run pull-apps', {cwd: './translationCore'}, (err, data) => {
