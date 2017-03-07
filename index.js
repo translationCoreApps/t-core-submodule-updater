@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 // index
-app.get('/', function (req, res) {
+app.post('/', function (req, res) {
   res.send('Starting process')
   console.log('Cloning...');
   exec('git clone --recursive ' + mainRepo + ' translationCore',  (err, data) => {
