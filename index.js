@@ -17,6 +17,11 @@ app.use(bodyParser.json())
 
 // index
 app.post('/', function (req, res) {
+  if (req.body.pull_request.state != "closed") {
+    console.log(req.body);
+    res.send('Not a PR closing');
+    return;
+  }
   res.send('Starting process')
   console.log('Cloning...');
   exec('git clone --recursive ' + mainRepo + ' translationCore',  (err, data) => {
