@@ -29,7 +29,7 @@ app.post('/', function (req, res) {
       exec('git config user.name "translationCore Updater"', {cwd: './translationCore'}, ()=> {
         console.log(err || data);
         console.log('Updating...');
-        exec('npm run pull-apps', {cwd: './translationCore'}, (err, data) => {
+        exec('npm run update-apps', {cwd: './translationCore'}, (err, data) => {
           if (err) {
             console.log(err);
             fs.removeSync('./translationCore');
