@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "Ian Arlo Hoegen <ianhoegen@gmail.com> (https://github.com/ihoegen)",
+  "author": {
+    "name": "unfoldingWord",
+    "email": "info@unfoldingword.org"
+  },
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.16.0",

@@ -51,6 +51,7 @@ app.post('/', function (req, res) {
               console.log(data);
               console.log(err || "Succesfully updated");
               fs.removeSync('./translationCore');
+              if (!err) console.log('Succesfully push');
               return;
             })
           });
