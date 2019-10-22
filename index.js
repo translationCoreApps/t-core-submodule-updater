@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const fs = require('fs-extra');
 const exec = require('child_process').exec;
-const mainRepo = "https://github.com/unfoldingWord-dev/translationCore.git";
+const mainRepo = "https://github.com/unfoldingWord/translationCore.git";
 
 app.set('port', (process.env.PORT || 8000));
 
@@ -45,7 +45,7 @@ app.post('/', function (req, res) {
             }
             console.log(data);
             var token = process.env.token;
-            var remote = 'https://' + token + '@github.com/unfoldingWord-dev/translationCore.git develop';
+            var remote = 'https://' + token + '@github.com/unfoldingWord/translationCore.git develop';
             console.log('Pushing...');
             exec('git push ' + remote, {cwd: './translationCore'}, (err, data) => {
               console.log(data);
